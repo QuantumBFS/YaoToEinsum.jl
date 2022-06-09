@@ -101,7 +101,7 @@ function add_gate!(eb::EinBuilder, b::ChainBlock)
 end
 
 function add_gate!(eb::EinBuilder, b::AbstractBlock)
-    B = Optimise.to_basictypes(b)
+    B = Optimise.simplify(b, rules=[YaoBlocks.Optimise.to_basictypes])
     if typeof(B) == typeof(b)
         throw("block of type `$(typeof(b))` can not be converted to tensor network representation!")
     else
